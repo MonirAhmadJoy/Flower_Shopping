@@ -1,5 +1,5 @@
 <?php
-    $link=mysqli_connect("localhost","root","","shop");
+    $link=mysqli_connect("localhost","root","","flowershop");
     /*
     $conn = new mysqli("localhost","root","","cart_system");
   	if($conn->connect_error){
