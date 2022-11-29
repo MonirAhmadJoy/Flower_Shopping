@@ -13,6 +13,10 @@ if (isset($_SESSION['user_login'])) {
   //SELECT * FROM `user_info` WHERE user_id='1';
 }
 
+if (isset($_POST['sign_up'])) {
+  
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +71,7 @@ if (isset($_SESSION['user_login'])) {
             <?php
             if ($user_id > 0) { ?>
               <li><a class="dropdown-item" href="regiForm.php">Sign Up</a></li>
-              <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+              <!-- <li><a class="dropdown-item" href="profile.php">Profile</a></li> -->
               <li><a class="dropdown-item" href="logout.php">Logout</a></li>
             <?php
             } else { ?>
@@ -214,6 +218,23 @@ if (isset($_SESSION['user_login'])) {
 
                   </form>
                 </div>
+
+                <!-- <div class="card-footer p-1">
+                  <form action="" class="form-submit">
+                    
+                    <?php
+                    // if ($user_id > 0) { ?>
+                    //   <textarea class="form-control rounded-pill shadow-none" rows="2" placeholder="Write about this flower"></textarea>
+                    //   <input type="image" name="submit" src="images\commentsub.jpg" border="0" alt="Submit" style="width: 50px;" />
+                    // <?php
+                    // } else { ?>
+                    //   <textarea class="form-control" placeholder="Write more about yourself"></textarea>
+                    // <?php
+                    // }
+                    ?>
+
+                  </form>
+                </div> -->
               </div>
             </div>
           </div>
@@ -233,8 +254,23 @@ if (isset($_SESSION['user_login'])) {
     $row1 = mysqli_fetch_assoc($info);
   }
   ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+function checkUsername() {
+    
+    jQuery.ajax({
+    url: "check_availability.php",
+    data:'username='+$("#username").val(),
+    type: "POST",
+    success:function(data){
+        $("#check-username").html(data);
+    },
+    error:function (){}
+    });
+}
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

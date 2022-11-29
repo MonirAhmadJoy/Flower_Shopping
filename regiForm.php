@@ -3,7 +3,7 @@ session_start();
 require_once './dbconn.php';
 if (isset($_POST['sign_up'])) {
     
-    $name = $_POST['name'];
+    $name = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $c_password = $_POST['c_password'];
@@ -45,6 +45,12 @@ if (isset($_POST['sign_up'])) {
     <title>Sign up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/signupFormSt.css">
+    <style>
+        #submit:disabled{
+       background-color: red;
+      opacity:0.5;   
+}
+    </style>
 </head>
 
 <body>
@@ -57,11 +63,17 @@ if (isset($_POST['sign_up'])) {
             <div class="row">
                 <form action="" method="POST" enctype="multipart/form-data">
                     <!-- <div class="login-text">-->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <input type="text" name="name" class="form-control" placeholder="Name" value="<?php if (isset($name)) {
                                                                                                                     echo $name;
                                                                                                                 } ?>" required>
+                    </div> -->
+                    <div class="form-outline">
+                      <span id="check-username"></span>
+                      <input type="text" name="username" id="username" class="form-control" placeholder="Username" onInput="checkUsername()"/>
+                      <!-- <label class="form-label" for="username">Username</label>      -->
                     </div>
+
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (isset($email)) {
                                                                                                                 echo $email;
@@ -81,32 +93,9 @@ if (isset($_POST['sign_up'])) {
                                                                                                                             } ?>" required>
                    
                     </div>
-                    <!--
+                   
                     <div class="form-group">
-                        <input type="text" name="mobile" id="" class="form-control" placeholder="Mobile" pattern="01[1|5|6|7|8|9][0-9]{8}" value="<?php //if (isset($mobile)) {
-                                                                                                                                                       // echo $mobile;
-                                                                                                                                                   // } ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="address" id="" class="form-control" placeholder="Address" value="<?php //if (isset($address)) {
-                                                                                                                        //echo $address;
-                                                                                                                   // } ?>" required>
-                    </div>
-                    <div class="form-group">
-
-                        <select class="form-control" id="Choose" name="choose">
-                            <option value="">Chose Security Question</option>
-                            <option value="one">What is your Primary School name?</option>
-                            <option value="two">What is you favourite Pet</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="answer" id="" class="form-control" placeholder="Give your Answer" required>
-                    </div>
-                   -->
-                    <div class="form-group">
-                        <input type="submit" name="sign_up" value="Sign Up" class="btn btn-primary" />
+                        <input id="submit" type="submit" name="sign_up" value="Sign Up" class="btn btn-primary" />
                     </div> 
                 </form>
                                                   
@@ -136,6 +125,22 @@ if (isset($_POST['sign_up'])) {
         </div>
 
     </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+function checkUsername() {
+    
+    jQuery.ajax({
+    url: "check_availability.php",
+    data:'username='+$("#username").val(),
+    type: "POST",
+    success:function(data){
+        $("#check-username").html(data);
+    },
+    error:function (){}
+    });
+}
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
