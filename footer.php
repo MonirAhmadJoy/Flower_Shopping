@@ -34,6 +34,6 @@
             </div>
         </div>
         </div>
-        <p class="text-center text-white pt-4">Copyright ©2021 All rights reserved</p>
+        <p class="text-center text-white pt-4">Copyright ©2023 All rights reserved</p>
     </footer>
     <!-- Footer END  -->

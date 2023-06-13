@@ -9,14 +9,20 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $email_check = mysqli_query($link, "SELECT * FROM `user` WHERE `email`='$email';");
-    
+
     if (mysqli_num_rows($email_check) > 0) {
         $row = mysqli_fetch_assoc($email_check);
         if ($row['password'] == md5($password)) {
-            $user_id=$row['user_id'];
-            $_SESSION['user_login'] = $user_id;
-            header('location:index.php');
-        } else {
+            if ($row['email_verified_at'] != null) {
+                $user_id = $row['user_id'];
+                $_SESSION['user_login'] = $user_id;
+                header('location:index.php');
+            }
+             else {
+                echo "<script>alert('Please verify your email that sent to your gmail')</script>";
+            }
+        }
+         else {
             $wrong_password = "This password is wrong";
         }
     } else {
@@ -72,14 +78,14 @@ if (isset($_POST['login'])) {
                 <?php if (isset($email_not_found)) {
                     echo  $email_not_found;
                 } ?>
-                <?php if (isset($wrong_password)) {?>
+                <?php if (isset($wrong_password)) { ?>
                     <div class="danger-alert">
-                    <p><?php echo $wrong_password;?></p>
+                        <p><?php echo $wrong_password; ?></p>
                     </div>
                     <div class="forgot">
                         <p><a href="forgot.php?id=<?php echo base64_encode($email); ?>">Forgot</a>&nbsp; &nbsp;password?</p>
                     </div>
-                    <?php 
+                <?php
                 } ?>
             </div>
             <div class="login-signup-option">

@@ -83,14 +83,14 @@
 	  $phone = $_POST['phone'];
 	  $products = $_POST['products'];
 	  $grand_total = $_POST['grand_total'];
-	  $district = $_POST['district'];
-	  $subdistrict = $_POST['subdistrict'];
-	  $city = $_POST['city'];
+	  $district =$_POST['pmode1'];
+	  $subdistrict = $_POST['pmode2'];
+	  $city =$_POST['pmode3'];
 	  $pmode = $_POST['pmode'];
 
 	  $data = '';
-
-	  
+	
+	//   echo '<script class="danger">Birthdate: ' . $subdistrict . '</script>';
 
 	  $qr = mysqli_query($link, "SELECT * FROM `cart` WHERE user_id='$user_id';"); 
       $num_rows = mysqli_num_rows($qr);
@@ -104,8 +104,11 @@
 	  LIMIT 1;");
 	  $tkrow=mysqli_fetch_assoc($tk);
 	  $order_info_id= $tkrow['cardnumber'];
-	  $sql= mysqli_query($link,"INSERT INTO `address` (`district`,`subdistrict`,`city`,`address_card`)VALUES('$district','$subdistrict','$city','$order_info_id');");
+	//   $sql= mysqli_query($link,"INSERT INTO `address` (`district`,`subdistrict`,`city`,`address_card`)VALUES('$district','$subdistrict','$city','$order_info_id');");
+	  $stmt = mysqli_prepare($link, "INSERT INTO `address` (`district`, `subdistrict`, `city`, `address_card`) VALUES (?, ?, ?, ?)");
 
+	  mysqli_stmt_bind_param($stmt, "ssss", $district, $subdistrict, $city, $order_info_id);
+	  mysqli_stmt_execute($stmt);
 	  while($row){
 		  
 		$pid=$row['product_id'];
@@ -121,8 +124,8 @@
         $row=mysqli_fetch_assoc($qr);
 	  }
 
+	  
       $sql= mysqli_query($link,"DELETE FROM cart WHERE user_id='$user_id';");
-
 	  $data .= '<div class="text-center">
 								<h1 class="display-4 mt-2 text-danger">Thank You!</h1>
 								<h2 class="text-success">Your Order Placed Successfully!</h2>

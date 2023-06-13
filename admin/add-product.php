@@ -8,7 +8,7 @@
 
 if (isset($_POST['add-product'])) {
     $cat_id = $_POST['choose_cat'];
-    $brand_id = $_POST['choose_brand'];
+    // $brand_id = $_POST['choose_brand'];
     $product_title = $_POST['product_title'];
     $product_price = $_POST['product_price'];
 
@@ -20,7 +20,7 @@ if (isset($_POST['add-product'])) {
 
 
 
-    $query = "INSERT INTO `products`(`cat_id`, `brand_id`, `product_title`, `product_price`, `product_image`,`description`) VALUES ('$cat_id','$brand_id','$product_title','$product_price','$photo_name','$dc')";
+    $query = "INSERT INTO `products`(`cat_id`, `product_title`, `product_price`, `product_image`,`description`) VALUES ('$cat_id','$product_title','$product_price','$photo_name','$dc')";
     $result = mysqli_query($link, $query);
     if ($result) {
         move_uploaded_file($_FILES['photo']['tmp_name'], 'images/' . $photo_name);
@@ -60,7 +60,7 @@ if (isset($_POST['add-product'])) {
                 </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="Choose_brand">Chose Brand</label>
                 <select class="form-control" id="Choose_brand" name="choose_brand">
                     <option value="">Choose product Brand</option>
@@ -76,7 +76,7 @@ if (isset($_POST['add-product'])) {
                     }
                     ?>
                 </select>
-            </div>
+            </div> -->
 
 
             <div class="form-group">
@@ -100,8 +100,6 @@ if (isset($_POST['add-product'])) {
             <div class="form-group">
                 <input type="submit" name="add-product" value="Add Product" class="btn btn-primary pull-right" />
             </div>
-
-
 
         </form>
         <br><br>

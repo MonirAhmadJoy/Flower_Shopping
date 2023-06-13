@@ -12,6 +12,30 @@ if (isset($_SESSION['user_login'])) {
     $pieces = explode($splitter, $name);
 }
 
+$url = 'http://localhost:4000/graphql';
+$query = '{
+    getUserById(id: ' . $user_id . ') {
+      user_id
+      name
+      email
+    }
+  }';
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, 'query=' . urlencode($query));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Handle the response
+$data = json_decode($response, true);
+$user = $data['data']['getUserById'];
+// if (isset($_POST['submit'])) {
+   
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +128,7 @@ if (isset($_SESSION['user_login'])) {
                             <a class="" href="index.php">Home</a>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link" href="#newest">Newest Arrival</a>
                     </li>
                     <li class="nav-item">
@@ -126,9 +150,9 @@ if (isset($_SESSION['user_login'])) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about-us">About us</a>
-                    </li>
+                    </li> -->
                 </ul>
-                <?php
+                <!-- <?php
                 if ($user_id > 0) { ?>
                     <div id="myCartBtn" class="myCartMenu">
                         <a href="mycart.php">
@@ -144,7 +168,7 @@ if (isset($_SESSION['user_login'])) {
                     </div>
                 <?php
                 }
-                ?>
+                ?> -->
 
             </div>
 
@@ -160,18 +184,26 @@ if (isset($_SESSION['user_login'])) {
                     <table class="table table-bordered">
                         <tr>
                             <td>ID</td>
-                            <td><?= $user_id; ?></td>
+                            <td><?=$user['user_id']; ?></td>
                         </tr>
                         <tr>
                             <td>Name</td>
-                            <td><?= ucwords($taker['name']); ?></td>
+                            <td><?=ucwords($user['name']); ?></td>
                         </tr>
 
                         <tr>
                             <td>Email</td>
-                            <td><?= $taker['email']; ?></td>
+                            <td><?=$user['email']; ?></td>
                         </tr>
                     </table>
+
+                    <form action="ApiTest.php" method="post" style="text-align: center;">
+                        <input type="text" name="github" id="github" class="form-control" placeholder="Enter GitHub Username" required>
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" name="submit" value="Find Repos" class="btn-pimary">
+                        </div>
+                    </form>
 
                 </div>
 
@@ -203,8 +235,8 @@ if (isset($_SESSION['user_login'])) {
                                     $cnum = $row['cardnumber'];
                                     $sqq = mysqli_query($link, "SELECT * FROM `address` Where `address_card`=$cnum");
                                     $nmm = mysqli_fetch_assoc($sqq);
-                                    $ads=$nmm['city'].','.$nmm['subdistrict'].','.$nmm['district'];
-                            
+                                    $ads = $nmm['city'] . ',' . $nmm['subdistrict'] . ',' . $nmm['district'];
+
                                 ?>
 
                                     <tr>

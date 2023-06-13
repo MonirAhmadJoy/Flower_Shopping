@@ -2,13 +2,17 @@
 session_start();
 require_once './dbconn.php';
 
+if($_SESSION['user_login']){
 $user_id = $_SESSION['user_login'];
 $take = mysqli_query($link, "SELECT * FROM `user` WHERE user_id='$user_id';");
 $taker = mysqli_fetch_assoc($take);
 $name = $taker['name'];
 $splitter = " ";
 $pieces = explode($splitter, $name);
-
+}
+else{
+  header('location:index.php');
+}
 /*
 $user_id == 0;
 if (isset($_SESSION['user_login'])) {
@@ -99,45 +103,58 @@ if ($user_id == 0) { ?>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <div class="d-flex myCartMenu me-2">
-                <a class="" href="index.php">Home</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#newest">Newest Arrival</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#top">Top sale</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Category
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <div class="d-flex myCartMenu me-2">
+                            <a class="" href="index.php">Home</a>
+                        </div>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="index.php#newest">Newest Arrival</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php#top">Top sale</a>
+                    </li>
+                    <li class="nav-item dropdown" id="message">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Category
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php
+                            $tb_pinfo = mysqli_query($link, "SELECT * FROM `categories`");
+                            while ($row3 = mysqli_fetch_assoc($tb_pinfo)) { ?>
+                                <li><a class="dropdown-item" href="index.php#<?php echo ucwords($row3['cat_title']); ?>"><?php echo ucwords($row3['cat_title']); ?></a></li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php#about-us">About us</a>
+                    </li> -->
+
+                </ul>
+
+
                 <?php
-                $tb_pinfo = mysqli_query($link, "SELECT * FROM `categories`");
-                while ($row3 = mysqli_fetch_assoc($tb_pinfo)) { ?>
-                  <li><a class="dropdown-item" href="#<?php echo ucwords($row3['cat_title']); ?>"><?php echo ucwords($row3['cat_title']); ?></a></li>
+                if ($user_id > 0) { ?>
+                    <div id="myCartBtn" class="myCartMenu">
+                        <a href="mycart.php">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-item" class="badge badge-danger"></span>
+                        </a>
+                    </div>
+                <?php
+                } else { ?>
+                    <div id="myCartBtn" class="myCartMenu">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-item" class="badge badge-danger"></span>
+                    </div>
                 <?php
                 }
                 ?>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about-us">About us</a>
-            </li>
-          </ul>
-          <div id="myCartBtn" class="myCartMenu">
-            <a href="mycart.php">
-              <i class="fas fa-shopping-cart"></i>
-              <span id="cart-item" class="badge badge-danger"></span>
-            </a>
-          </div>
-        </div>
 
-      </div>
+            </div>
     </nav>
     <!--Navbar END -->
 

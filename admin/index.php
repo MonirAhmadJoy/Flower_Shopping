@@ -5,7 +5,6 @@ require_once './dbconn.php';
 if (!isset($_SESSION['aduser_login'])) {
   header('location:adminlogin.php');
 }
-
 ?>
 
 
@@ -31,10 +30,6 @@ if (!isset($_SESSION['aduser_login'])) {
       color: #fff;
       margin-top: 10px;
     }
-   
-
-
-
   </style>
   <!-- Bootstrap -->
   <script src="https://kit.fontawesome.com/cc0fc94170.js" crossorigin="anonymous"></script>
@@ -43,6 +38,8 @@ if (!isset($_SESSION['aduser_login'])) {
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/font-awesome.min.css" rel="stylesheet">
   <link href="styles/style1.css" rel="stylesheet">
+
+  <!-- Pagination Table -->
 
   <link href="../css/dataTables.bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
@@ -54,10 +51,10 @@ if (!isset($_SESSION['aduser_login'])) {
 </head>
 
 <body>
-  
 
-    
- 
+
+
+
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -84,16 +81,15 @@ if (!isset($_SESSION['aduser_login'])) {
       <div class="col-sm-3">
         <div class="list-group">
           <a href="index.php?page=adminDashboard" class="list-group-item active">
-          <i class="fa fa-dashboard"></i> Dashboard
+            <i class="fa fa-dashboard"></i> Dashboard
           </a>
           <a href="index.php?page=add-user" class="list-group-item"><i class="fa fa-user-plus"></i> ADD USER</a>
           <a href="index.php?page=products" class="list-group-item"><i class="fas fa-list-alt"></i> PRODUCT LIST</a>
           <a href="index.php?page=orders" class="list-group-item"><i class="fas fa-shopping-bag"></i> ORDERS</a>
           <a href="index.php?page=add-product" class="list-group-item"><i class="far fa-plus-square"></i> ADD PRODUCTS</a>
+          <a href="predict.html" class="list-group-item"><i class="far fa-plus-square"></i> CLASSIFY PRODUCT</a>
           <a href="index.php?page=add-category" class="list-group-item"><i class="far fa-plus-square"></i> ADD NEW CATEGORY</a>
-          <a href="index.php?page=add-brand" class="list-group-item"><i class="far fa-plus-square"></i> ADD NEW BRAND</a>
-
-
+          <!-- <a href="index.php?page=add-brand" class="list-group-item"><i class="far fa-plus-square"></i> ADD NEW BRAND</a> -->
         </div>
 
       </div>
@@ -101,7 +97,7 @@ if (!isset($_SESSION['aduser_login'])) {
         <div class="content">
           <?php
           if (isset($_GET['page'])) {
-            $page = $_GET['page'] . '.php';
+              $page = $_GET['page'] . '.php';
           } else {
             $page = 'adminDashboard.php';
           }

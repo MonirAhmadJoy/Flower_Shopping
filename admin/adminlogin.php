@@ -17,11 +17,8 @@
     if(mysqli_num_rows($username_check)>0){
        $row=mysqli_fetch_assoc($username_check);
        if($row['admin_password']==md5($password)){
-         
             $_SESSION['aduser_login']=$username;
-            header('location:index.php');
-            
-          
+            header('location:index.php');       
        }
        else{
          $wrong_password="This password is wrong";
@@ -60,7 +57,7 @@
 
            
            <div>
-                <h1  class="col-lg-12 text-center">Welcome to Online Shopping System</h1>
+                <h1  class="col-lg-12 text-center">Welcome to Online Flower Shopping System</h1>
            </div>
         <div class="row">
         <h2 class="text-center">Admin Login Form</h2>

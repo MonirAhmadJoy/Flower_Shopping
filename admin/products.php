@@ -16,7 +16,7 @@
       <tr>
         <th>Product ID</th>
         <th>Category ID</th>
-        <th>Brand ID</th>
+        <!-- <th>Brand ID</th> -->
         <th>Title</th>
         <th>Price</th>
         <th>Image</th>
@@ -32,7 +32,7 @@
       <tr>
         <td><?php echo $row['product_id']; ?> </td>
         <td><?php echo $row['cat_id']; ?> </td>
-        <td><?php echo $row['brand_id']; ?> </td>
+        <!-- <td><?php echo $row['brand_id']; ?> </td> -->
         <td><?php echo ucwords($row['product_title']); ?> </td>
         <td><?php echo $row['product_price']; ?> </td>
         <td><img src="images/<?php echo $row['product_image'] ?>" height="60" width="55" alt=""> </td>

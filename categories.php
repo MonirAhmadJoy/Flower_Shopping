@@ -12,7 +12,6 @@
     $pieces = explode($splitter, $name);
     //SELECT * FROM `user_info` WHERE user_id='1';
   }
-
   $id = base64_decode($_GET['id']);
   $tb = mysqli_query($link, "SELECT * FROM `categories` where `cat_id`='$id'");
   $roow1 = mysqli_fetch_assoc($tb);
@@ -32,7 +31,6 @@
 
     <link rel="stylesheet" href="styles/indexSt.css">
     <link rel="stylesheet" href="styles/myCartSt.css">
-
   </head>
 
   <body>
@@ -52,8 +50,9 @@
           }
           ?>
         </div>
+
         <div class="col-md-1 col-sm-1">
-          <div class="dropdown">
+          <div class="dropdown" id="message">
 
             <a class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <?php
@@ -124,22 +123,26 @@
             </li>
           </ul>
           <?php
-          if ($user_id > 0) { ?>
-            <div id="myCartBtn" class="myCartMenu">
-              <a href="mycart.php">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-item" class="badge badge-danger"></span>
-              </a>
-            </div>
-          <?php
-          } else { ?>
-            <div id="myCartBtn" class="myCartMenu">
+        if ($user_id > 0) { ?>
+          <div id="myCartBtn" class="myCartMenu">
+          <!-- <i class="fas fa-shopping-cart"></i>
+          <span id="cart-item" class="badge badge-danger"></span> -->
+          <i class="fas fa-shopping-cart"></i>
+            <span id="cart-item" class="badge badge-danger"></span>
+            <!-- <a href="mycart.php">
               <i class="fas fa-shopping-cart"></i>
               <span id="cart-item" class="badge badge-danger"></span>
-            </div>
-          <?php
-          }
-          ?>
+            </a> -->
+          </div>
+        <?php
+        } else { ?>
+          <div id="myCartBtn" class="myCartMenu">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-item" class="badge badge-danger"></span>
+          </div>
+        <?php
+        }
+        ?>
 
         </div>
 

@@ -38,8 +38,8 @@ require_once './dbconn.php';
         $name = $nm['name'];
         $sqq = mysqli_query($link, "SELECT * FROM `address` Where `address_card`=$cnum");
         $nmm = mysqli_fetch_assoc($sqq);
+      
         $ads=$nmm['city'].','.$nmm['subdistrict'].','.$nmm['district'];
-
       ?>
 
         <tr>

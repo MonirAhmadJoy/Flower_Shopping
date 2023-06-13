@@ -1,5 +1,5 @@
 <?php
-    $link=mysqli_connect("localhost","root","","shop");
+    $link=mysqli_connect("localhost","root","","flowershop");
     
     /*
     if($link){
