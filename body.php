@@ -245,130 +245,16 @@ if (isset($_SESSION['user_login'])) {
 
                   <!-- <div class="d-flex justify-content-between pCardPrice"> -->
                   <h4 class="col-sm-8"><?php echo $hw['product_price']; ?></h4>
-                  <?php if ($user_id > 0) {
-                    $pid = $hw['product_id'];
-                    $queryrat = mysqli_query($link, "SELECT * FROM feedback WHERE `userID`=$user_id AND`prdID`=$pid;");
-                    if (mysqli_num_rows($queryrat) == 0) {
-                      $pos = 0;
-                    } else {
-                      $qryrat = mysqli_fetch_assoc($queryrat);
-                      $pos = $qryrat['rating'];
-                    }
-                  ?>
-                    <div class="row col-sm-5 style=" text-align:right;">
-                      <?php for ($x = 1; $x <= $pos; $x++) { ?>
-                        <button class=<?php echo 'rating' . $x ?> style="float: left; width: 15%;padding:0; border: none;background: none; margin-right:3px;display: inline-block;"><i id=<?php echo 'rat' . $x . $hw['product_id'] ?> class="fa fa-star checked"></i></button>
-                      <?php } ?>
-
-                      <?php for ($x = $pos + 1; $x <= 5; $x++) { ?>
-                        <button class=<?php echo 'rating' . $x ?> style="float: left; width: 15%;padding:0; border: none;background: none; margin-right:3px;"><i id=<?php echo 'rat' . $x . $hw['product_id'] ?> class="fa fa-star"></i></button>
-                      <?php } ?>
-
-                    </div>
-
-                  <?php
-                  }
-                  ?>
+                  
                 </div>
-
                 <?php
 
                 $pid = $hw['product_id'];
 
-                if ($user_id > 0) {
-                  $qrytotal = mysqli_query($link, "SELECT SUM(`likes`) AS tlikes,SUM(`Dislikes`) AS tdislikes FROM feedback WHERE `prdID`=$pid;");
-                  $qryr = mysqli_fetch_assoc($qrytotal);
-                  $Tlikenum = $qryr['tlikes'];
-                  $Tdislikenum = $qryr['tdislikes'];
-                  $query = mysqli_query($link, "SELECT * FROM `feedback` WHERE `userID`=$user_id AND `prdID`=$pid;");
-                  if (mysqli_num_rows($query) == 0) { ?>
-                    <div class="row">
-                      <div class="col-sm-2" style="margin-right: 0px;">
-                        <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hw['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                      </div>
-
-                      <div class="col-sm-4" style="font-weight: bold;">
-                        <span id=<?php echo 'cntL' . $hw['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                      </div>
-
-                      <div class="col-sm-4" style="font-weight: bold;">
-                        <span id=<?php echo 'cntD' . $hw['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hw['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                      </div>
-                    </div>
-                    <?php
-                  } else {
-                    $cs = 0;
-                    $qr = mysqli_query($link, "SELECT * FROM `feedback` WHERE `userID`=$user_id AND `prdID`=$pid;");
-                    $r = mysqli_fetch_assoc($qr);
-                    $likenum = $r['likes'];
-                    $dislikenum = $r['Dislikes'];
-                    if ($likenum == 0 && $dislikenum == 0) { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hw['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $hw['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $hw['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hw['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                    <?php } else if ($likenum == 1 && $dislikenum == 0) { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hw['product_id'] ?> class="fa fa-thumbs-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $hw['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $hw['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hw['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                    <?php } else { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hw['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $hw['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $hw['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hw['product_id'] ?> class="fa fa-thumbs-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                  <?php
-                    }
-                  }
-                  ?>
-                  <!-- <div class="center"> -->
-
-                  <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                if ($user_id > 0) { ?>
+                <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
                     cart</button>
-                  <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right;">Review</a> <br><br>
+                    <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
                   <!-- </div> -->
 
 
@@ -381,7 +267,6 @@ if (isset($_SESSION['user_login'])) {
                 ?>
 
               </form>
-              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -437,133 +322,16 @@ if (isset($_SESSION['user_login'])) {
 
                   <!-- <div class="d-flex justify-content-between pCardPrice"> -->
                   <h4 class="col-sm-8"><?php echo $hww['product_price']; ?></h4>
-                  <?php if ($user_id > 0) {
-                    $pid = $hww['product_id'];
-                    $queryrat = mysqli_query($link, "SELECT * FROM feedback WHERE `userID`=$user_id AND`prdID`=$pid;");
-                    if (mysqli_num_rows($queryrat) == 0) {
-                      $pos = 0;
-                    } else {
-                      $qryrat = mysqli_fetch_assoc($queryrat);
-                      $pos = $qryrat['rating'];
-                    }
-                  ?>
-                    <div class="row col-sm-5 style=" text-align:right;">
-                      <?php for ($x = 1; $x <= $pos; $x++) { ?>
-                        <button class=<?php echo 'rating' . $x ?> style="float: left; width: 15%;padding:0; border: none;background: none; margin-right:3px;display: inline-block;"><i id=<?php echo 'rat' . $x . $hww['product_id'] ?> class="fa fa-star checked"></i></button>
-                      <?php } ?>
-
-                      <?php for ($x = $pos + 1; $x <= 5; $x++) { ?>
-                        <button class=<?php echo 'rating' . $x ?> style="float: left; width: 15%;padding:0; border: none;background: none; margin-right:3px;"><i id=<?php echo 'rat' . $x . $hww['product_id'] ?> class="fa fa-star"></i></button>
-                      <?php } ?>
-
-                    </div>
-
-                  <?php
-                  }
-                  ?>
+                  
                 </div>
-
                 <?php
 
                 $pid = $hww['product_id'];
 
-                if ($user_id > 0) {
-                  $qrytotal = mysqli_query($link, "SELECT SUM(`likes`) AS tlikes,SUM(`Dislikes`) AS tdislikes FROM feedback WHERE `prdID`=$pid;");
-                  $qryr = mysqli_fetch_assoc($qrytotal);
-                  $Tlikenum = $qryr['tlikes'];
-                  $Tdislikenum = $qryr['tdislikes'];
-                  $query = mysqli_query($link, "SELECT * FROM `feedback` WHERE `userID`=$user_id AND `prdID`=$pid;");
-                  if (mysqli_num_rows($query) == 0) { ?>
-                    <div class="row">
-                      <div class="col-sm-2" style="margin-right: 0px;">
-                        <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hww['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                      </div>
-
-                      <div class="col-sm-4" style="font-weight: bold;">
-                        <span id=<?php echo 'cntL' . $hww['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                      </div>
-
-                      <div class="col-sm-4" style="font-weight: bold;">
-                        <span id=<?php echo 'cntD' . $hww['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hww['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                      </div>
-                    </div>
-                    <?php
-                  } else {
-                    $cs = 0;
-
-
-
-                    $qr = mysqli_query($link, "SELECT * FROM `feedback` WHERE `userID`=$user_id AND `prdID`=$pid;");
-                    $r = mysqli_fetch_assoc($qr);
-                    $likenum = $r['likes'];
-                    $dislikenum = $r['Dislikes'];
-                    if ($likenum == 0 && $dislikenum == 0) { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hww['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $hww['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $hww['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hww['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                    <?php } else if ($likenum == 1 && $dislikenum == 0) { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hww['product_id'] ?> class="fa fa-thumbs-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $hww['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $hww['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hww['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                    <?php } else { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $hww['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $hww['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $hww['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $hww['product_id'] ?> class="fa fa-thumbs-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                  <?php
-                    }
-                  }
-                  ?>
-                  <!-- <div class="center"> -->
-
-                  <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                if ($user_id > 0) { ?>
+                <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
                     cart</button>
-                  <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right;">Review</a> <br><br>
+                    <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
                   <!-- </div> -->
 
 
@@ -639,156 +407,38 @@ if (isset($_SESSION['user_login'])) {
                 </div>
                 <!-- <div class="card-footer p-1"> -->
                 <form action="" class="form-submit">
-                  <input type="hidden" class="pqty" value="1">
-                  <input type="hidden" class="pid" value="<?= $row['product_id'] ?>">
-                  <input type="hidden" class="uid" value="<?= $user_id ?>">
-                  <input type="hidden" class="pname" value="<?= $row['product_title'] ?>">
-                  <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
-                  <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>">
+                <input type="hidden" class="pqty" value="1">
+                <input type="hidden" class="pid" value="<?= $row['product_id'] ?>">
+                <input type="hidden" class="uid" value="<?= $user_id ?>">
+                <input type="hidden" class="pname" value="<?= $row['product_title'] ?>">
+                <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>">
 
-                  <div class="row">
+                <div class="row">
 
-                    <!-- <div class="d-flex justify-content-between pCardPrice"> -->
-                    <h4 class="col-sm-8"><?php echo $row['product_price']; ?></h4>
-                    <?php if ($user_id > 0) {
-                      $pid = $row['product_id'];
-                      $queryrat = mysqli_query($link, "SELECT * FROM feedback WHERE `userID`=$user_id AND`prdID`=$pid;");
-                      if (mysqli_num_rows($queryrat) == 0) {
-                        $pos = 0;
-                      } else {
-                        $qryrat = mysqli_fetch_assoc($queryrat);
-                        $pos = $qryrat['rating'];
-                      }
-                    ?>
-                      <div class="row col-sm-5 style=" text-align:right;">
-                        <?php for ($x = 1; $x <= $pos; $x++) { ?>
-                          <button class=<?php echo 'rating' . $x ?> style="float: left; width: 15%;padding:0; border: none;background: none; margin-right:3px;display: inline-block;"><i id=<?php echo 'rat' . $x . $row['product_id'] ?> class="fa fa-star checked"></i></button>
-                        <?php } ?>
+                  <!-- <div class="d-flex justify-content-between pCardPrice"> -->
+                  <h4 class="col-sm-8"><?php echo $row['product_price']; ?></h4>
+                  
+                </div>
+                <?php
 
-                        <?php for ($x = $pos + 1; $x <= 5; $x++) { ?>
-                          <button class=<?php echo 'rating' . $x ?> style="float: left; width: 15%;padding:0; border: none;background: none; margin-right:3px;"><i id=<?php echo 'rat' . $x . $row['product_id'] ?> class="fa fa-star"></i></button>
-                        <?php } ?>
+                $pid = $row['product_id'];
 
-                      </div>
-
-                    <?php
-                    }
-                    ?>
-                  </div>
-
-                  <?php
-
-                  $pid = $row['product_id'];
-
-                  if ($user_id > 0) {
-                    $qrytotal = mysqli_query($link, "SELECT SUM(`likes`) AS tlikes,SUM(`Dislikes`) AS tdislikes FROM feedback WHERE `prdID`=$pid;");
-                    $qryr = mysqli_fetch_assoc($qrytotal);
-                    $Tlikenum = $qryr['tlikes'];
-                    $Tdislikenum = $qryr['tdislikes'];
-                    $query = mysqli_query($link, "SELECT * FROM `feedback` WHERE `userID`=$user_id AND `prdID`=$pid;");
-                    if (mysqli_num_rows($query) == 0) { ?>
-                      <div class="row">
-                        <div class="col-sm-2" style="margin-right: 0px;">
-                          <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $row['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntL' . $row['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-4" style="font-weight: bold;">
-                          <span id=<?php echo 'cntD' . $row['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $row['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                        </div>
-                      </div>
-                      <?php
-                    } else {
-                      $cs = 0;
+                if ($user_id > 0) { ?>
+                <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                    cart</button>
+                <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
 
 
+                <?php
+                } else { ?>
+                  <button class="btn btn-info btn-block addItemBtn disabled"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                    cart</button>
+                <?php
+                }
+                ?>
 
-                      $qr = mysqli_query($link, "SELECT * FROM `feedback` WHERE `userID`=$user_id AND `prdID`=$pid;");
-                      $r = mysqli_fetch_assoc($qr);
-                      $likenum = $r['likes'];
-                      $dislikenum = $r['Dislikes'];
-                      if ($likenum == 0 && $dislikenum == 0) { ?>
-                        <div class="row">
-                          <div class="col-sm-2" style="margin-right: 0px;">
-                            <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $row['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                          </div>
-
-                          <div class="col-sm-4" style="font-weight: bold;">
-                            <span id=<?php echo 'cntL' . $row['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                          </div>
-
-                          <div class="col-sm-4" style="font-weight: bold;">
-                            <span id=<?php echo 'cntD' . $row['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                          </div>
-
-                          <div class="col-sm-2">
-                            <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $row['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                          </div>
-                        </div>
-                      <?php } else if ($likenum == 1 && $dislikenum == 0) { ?>
-                        <div class="row">
-                          <div class="col-sm-2" style="margin-right: 0px;">
-                            <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $row['product_id'] ?> class="fa fa-thumbs-up blue" style="font-size:34px"></i></button>
-                          </div>
-
-                          <div class="col-sm-4" style="font-weight: bold;">
-                            <span id=<?php echo 'cntL' . $row['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                          </div>
-
-                          <div class="col-sm-4" style="font-weight: bold;">
-                            <span id=<?php echo 'cntD' . $row['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                          </div>
-
-                          <div class="col-sm-2">
-                            <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $row['product_id'] ?> class="fa fa-thumbs-o-down blue" style="font-size:34px"></i></button>
-                          </div>
-                        </div>
-                      <?php } else { ?>
-                        <div class="row">
-                          <div class="col-sm-2" style="margin-right: 0px;">
-                            <button class="addItemlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnL' . $row['product_id'] ?> class="fa fa-thumbs-o-up blue" style="font-size:34px"></i></button>
-                          </div>
-
-                          <div class="col-sm-4" style="font-weight: bold;">
-                            <span id=<?php echo 'cntL' . $row['product_id'] ?>> <?php echo "Likes: " . $Tlikenum; ?> </span>
-                          </div>
-
-                          <div class="col-sm-4" style="font-weight: bold;">
-                            <span id=<?php echo 'cntD' . $row['product_id'] ?>><?php echo "Dislikes: " . $Tdislikenum; ?> </span>
-                          </div>
-
-                          <div class="col-sm-2">
-                            <button class="addItemdlike" style="padding:0; border: none;background: none"><i id=<?php echo 'btnD' . $row['product_id'] ?> class="fa fa-thumbs-down blue" style="font-size:34px"></i></button>
-                          </div>
-                        </div>
-                    <?php
-                      }
-                    }
-                    ?>
-                    <!-- <div class="center"> -->
-
-                    <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
-                      cart</button>
-                    <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right;">Review</a> <br><br>
-                    <!-- </div> -->
-
-
-                  <?php
-                  } else { ?>
-                    <button class="btn btn-info btn-block addItemBtn disabled"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
-                      cart</button>
-                  <?php
-                  }
-                  ?>
-
-                </form>
+              </form>
                 <!-- </div> -->
               </div>
             </div>
@@ -872,7 +522,7 @@ if (isset($_SESSION['user_login'])) {
         var pid = $form.find(".pid").val();
         var uid = $form.find(".uid").val();
         var pos = 1;
-        var st = 1;
+        var st = 2;
         $.ajax({
           url: 'man.php',
           method: 'post',
@@ -896,7 +546,7 @@ if (isset($_SESSION['user_login'])) {
         var uid = $form.find(".uid").val();
 
         var pos = 2;
-        var st = 1;
+        var st = 2;
         $.ajax({
           url: 'man.php',
           method: 'post',
@@ -919,7 +569,7 @@ if (isset($_SESSION['user_login'])) {
         var uid = $form.find(".uid").val();
 
         var pos = 3;
-        var st = 3;
+        var st = 2;
         $.ajax({
           url: 'man.php',
           method: 'post',
@@ -942,7 +592,7 @@ if (isset($_SESSION['user_login'])) {
         var uid = $form.find(".uid").val();
 
         var pos = 4;
-        var st = 4;
+        var st = 2;
         $.ajax({
           url: 'man.php',
           method: 'post',
@@ -965,7 +615,7 @@ if (isset($_SESSION['user_login'])) {
         var uid = $form.find(".uid").val();
 
         var pos = 5;
-        var st = 5;
+        var st = 2;
         $.ajax({
           url: 'man.php',
           method: 'post',

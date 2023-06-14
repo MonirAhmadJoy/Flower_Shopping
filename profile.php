@@ -62,7 +62,6 @@ $user = $data['data']['getUserById'];
     <script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/script.js"></script>
 
-
 </head>
 
 <body>
@@ -207,7 +206,7 @@ $user = $data['data']['getUserById'];
 
                 </div>
 
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <h2 class="text-primary" style="text-align: center;">Your Products</h2>
 
                     <div class="table-responsive">

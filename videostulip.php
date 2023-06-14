@@ -18,8 +18,9 @@ $id = base64_decode($_GET['id']);
       integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="navbar.scss" />
-    <link rel="stylesheet" href="styles.scss" />
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- <link rel="stylesheet" href="navbar.scss" />
+    <link rel="stylesheet" href="styles.scss" /> -->
     
 
     <title>My Flower</title>
@@ -47,7 +48,9 @@ $id = base64_decode($_GET['id']);
 
 
     <nav class="navbar">
-      
+    <div class="navbar__menu">
+    <a href="index.php" class="navbar__menu--links" id="button">Home</a>
+    </div>
       <div class="navbar__bars"><i class="fas fa-bars"></i></div>
       <div class="navbar__menu">
         <a href="videostulip.php?id=<?php echo base64_encode(3); ?>" class="navbar__menu--links" id="button">Rose</a>
@@ -81,7 +84,9 @@ $id = base64_decode($_GET['id']);
     <?php
     } elseif ($id == 2) { ?>
     <nav class="navbar">
-      
+    <div class="navbar__menu">
+    <a href="index.php" class="navbar__menu--links" id="button">Home</a>
+    </div>
       <div class="navbar__bars"><i class="fas fa-bars"></i></div>
       <div class="navbar__menu">
         <a href="videostulip.php?id=<?php echo base64_encode(3); ?>" class="navbar__menu--links" id="button">Rose</a>
@@ -112,7 +117,9 @@ $id = base64_decode($_GET['id']);
     <?php
     } elseif ($id == 3) { ?>
     <nav class="navbar">
-      
+    <div class="navbar__menu">
+    <a href="index.php" class="navbar__menu--links" id="button">Home</a>
+    </div>
       <div class="navbar__bars"><i class="fas fa-bars"></i></div>
       <div class="navbar__menu">
         <a href="videostulip.php?id=<?php echo base64_encode(1); ?>" class="navbar__menu--links" id="button">Daisy</a>
@@ -143,7 +150,9 @@ $id = base64_decode($_GET['id']);
     <?php
     } elseif ($id == 4) { ?>
     <nav class="navbar">
-      
+    <div class="navbar__menu">
+    <a href="index.php" class="navbar__menu--links" id="button">Home</a>
+    </div>
       <div class="navbar__bars"><i class="fas fa-bars"></i></div>
       <div class="navbar__menu">
         <a href="videostulip.php?id=<?php echo base64_encode(3); ?>" class="navbar__menu--links" id="button">Rose</a>
@@ -174,7 +183,9 @@ $id = base64_decode($_GET['id']);
     <?php
     } else { ?>
     <nav class="navbar">
-      
+    <div class="navbar__menu">
+    <a href="index.php" class="navbar__menu--links" id="button">Home</a>
+    </div>
       <div class="navbar__bars"><i class="fas fa-bars"></i></div>
       <div class="navbar__menu">
         <a href="videostulip.php?id=<?php echo base64_encode(3); ?>" class="navbar__menu--links" id="button">Rose</a>

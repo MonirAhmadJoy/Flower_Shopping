@@ -33,7 +33,7 @@
   <div style="text-align: center;">
     <h1>Here are your searched user's repository list</h1>
   </div> <?php
-          $accessToken = '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';
+          $accessToken = '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';
 
           if (isset($_POST['github'])) {
             $githubUsername = $_POST['github'];

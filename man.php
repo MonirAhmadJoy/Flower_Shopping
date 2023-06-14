@@ -248,7 +248,7 @@ if (isset($_GET['level2Value'])) {
     $queryd = mysqli_query($link, "SELECT * FROM `city` WHERE `s_id`=2;");
     else if($geted=="Sitakunda")
     $queryd = mysqli_query($link, "SELECT * FROM `city` WHERE `s_id`=3;");
-    else if($geted=="Cox'sBazar Sadar")
+    else if($geted=="Sadar")
     $queryd = mysqli_query($link, "SELECT * FROM `city` WHERE `s_id`=4;");
     else if($geted=="Ramu")
     $queryd = mysqli_query($link, "SELECT * FROM `city` WHERE `s_id`=5;");

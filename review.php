@@ -13,6 +13,9 @@ if (isset($_SESSION['user_login'])) {
   $pieces = explode($splitter, $name);
   //SELECT * FROM `user_info` WHERE user_id='1';
 }
+else{
+  header('location:index.php');
+}
 
 $id = base64_decode($_GET['id']);
 $tb = mysqli_query($link, "SELECT * FROM `products` WHERE `product_id`='$id'");
@@ -143,10 +146,10 @@ $row = mysqli_fetch_assoc($tb);
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#newest">Newest Arrival</a>
+            <a class="nav-link" href="index.php#newest">Newest Arrival</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#top">Top sale</a>
+            <a class="nav-link" href="index.php#top">Top sale</a>
           </li>
           <li class="nav-item dropdown" id="message">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -156,14 +159,14 @@ $row = mysqli_fetch_assoc($tb);
               <?php
               $tb_pinfo = mysqli_query($link, "SELECT * FROM `categories`");
               while ($row3 = mysqli_fetch_assoc($tb_pinfo)) { ?>
-                <li><a class="dropdown-item" href="#<?php echo ucwords($row3['cat_title']); ?>"><?php echo ucwords($row3['cat_title']); ?></a></li>
+                <li><a class="dropdown-item" href="index.php#<?php echo ucwords($row3['cat_title']); ?>"><?php echo ucwords($row3['cat_title']); ?></a></li>
               <?php
               }
               ?>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about-us">About us</a>
+            <a class="nav-link" href="insex.php#about-us">About us</a>
           </li>
         </ul>
         <?php

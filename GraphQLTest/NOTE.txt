@@ -1,0 +1,6 @@
+query{
+ getUserById(id: 2){
+  user_id
+  name
+}
+}
