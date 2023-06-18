@@ -71,10 +71,30 @@
 	if (isset($_POST['qty'])) {
 	  //$user_id = $_SESSION['user_login'];
 	  $qty = $_POST['qty'];
-	  $pid = $_POST['pid'];
+	  $pid = $_POST['pidn'];
 	  $pprice = $_POST['pprice'];
 	  $tprice = $qty * $pprice;
+	//   $tprice=number_format($tprice1, 2)." /=";
       $stmt=mysqli_query($link,"UPDATE `cart` SET `qty`='$qty',`total_price`='$tprice' WHERE `product_id`='$pid' AND user_id='$user_id' ;");
+	  $qr = mysqli_query($link, "SELECT * FROM `cart` WHERE user_id='$user_id';");
+      $r = mysqli_fetch_assoc($qr);
+	  $newgt=0;
+	  $newtp=0;
+	  while($r){
+			$npid=$r['product_id'];
+			if($npid==$pid){
+				$newtp=$r['total_price'];
+			}
+			$newgt+=$r['total_price'];
+			$r = mysqli_fetch_assoc($qr);
+	  }
+	//   $("#qty' . $pid .'").removeClass();
+	// $("#grandT").text("' . $newgt . '");
+	  echo '<script> 
+	  $("#qnt' . $pid .'").text("' . $newtp . '.00 /=");
+	  $("#grandT").text("' . $newgt . '.00 /=");
+	  </script>';
+
 	}
 
 	// Checkout and save customer info in the order table

@@ -33,7 +33,7 @@
   <div style="text-align: center;">
     <h1>Here are your searched user's repository list</h1>
   </div> <?php
-          $accessToken = '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';
+          $accessToken = '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';
 
           if (isset($_POST['github'])) {
             $githubUsername = $_POST['github'];
@@ -44,7 +44,7 @@
           $options = [
             'http' => [
               'header' => [
-                'User-Agent: PHP',
+                'User-Agent: GitApi',
                 'Authorization: Bearer ' . $accessToken
               ]
             ]

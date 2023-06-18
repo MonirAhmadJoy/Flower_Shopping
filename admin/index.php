@@ -30,6 +30,28 @@ if (!isset($_SESSION['aduser_login'])) {
       color: #fff;
       margin-top: 10px;
     }
+
+    .text-primary {
+      margin-left: 20px;
+      margin-bottom: 20px;
+
+    }
+
+    .larger-icon {
+      font-size: 6em;
+      margin-left: 20px;
+      margin-bottom: 20px;
+      /* Increase the font size as desired */
+    }
+
+    .classify-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background-image: url('images/Capture29.png');
+      background-size: cover;
+      margin-right: 1px;
+    }
   </style>
   <!-- Bootstrap -->
   <script src="https://kit.fontawesome.com/cc0fc94170.js" crossorigin="anonymous"></script>
@@ -83,7 +105,9 @@ if (!isset($_SESSION['aduser_login'])) {
           <a href="index.php?page=products" class="list-group-item"><i class="fas fa-list-alt"></i> PRODUCT LIST</a>
           <a href="index.php?page=orders" class="list-group-item"><i class="fas fa-shopping-bag"></i> ORDERS</a>
           <a href="index.php?page=add-product" class="list-group-item"><i class="far fa-plus-square"></i> ADD PRODUCTS</a>
-          <a href="predict.html" class="list-group-item"><i class="far fa-plus-square"></i> CLASSIFY PRODUCT</a>
+          <a href="predict.html" class="list-group-item">
+            <i class="classify-icon"></i> CLASSIFY PRODUCT
+          </a>
           <a href="index.php?page=add-category" class="list-group-item"><i class="far fa-plus-square"></i> ADD NEW CATEGORY</a>
           <!-- <a href="index.php?page=add-brand" class="list-group-item"><i class="far fa-plus-square"></i> ADD NEW BRAND</a> -->
         </div>
@@ -93,7 +117,7 @@ if (!isset($_SESSION['aduser_login'])) {
         <div class="content">
           <?php
           if (isset($_GET['page'])) {
-              $page = $_GET['page'] . '.php';
+            $page = $_GET['page'] . '.php';
           } else {
             $page = 'adminDashboard.php';
           }

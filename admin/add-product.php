@@ -12,10 +12,10 @@ if (isset($_POST['add-product'])) {
     $product_title = $_POST['product_title'];
     $product_price = $_POST['product_price'];
 
-    $photo = $_FILES['photo']['name'];
-    $photo = explode('.', $photo);
-    $photo_extension = end($photo);
-    $photo_name = $product_title . '.' . $photo_extension;
+    $photo_name = $_FILES['photo']['name'];
+    // $photo = explode('.', $photo);
+    // $photo_extension = end($photo);
+    // $photo_name = $product_title . '.' . $photo_extension;
     $dc=$_POST['dc'];
 
 

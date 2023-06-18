@@ -7,7 +7,7 @@
   align-items: center; }
 
 .navbar {
-  background: #860ad8;
+  background: #abd80a;
   height: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -56,7 +56,7 @@
   padding: 0 1rem; }
 
 .navbar__menu--links:hover {
-  color: #8816ca;
+  color: #ebe713;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 

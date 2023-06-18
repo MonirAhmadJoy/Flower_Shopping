@@ -196,15 +196,15 @@ if ($user_id == 0) { ?>
               <tbody>
                 <?php
                 require_once './dbconn.php';
-                $tb_pinfo = mysqli_query($link, "SELECT * FROM  `products`
-                                  INNER JOIN `cart` ON products.product_id=cart.product_id");
+                $tb_pinfo = mysqli_query($link, "SELECT * FROM  `products` INNER JOIN `cart` ON products.product_id=cart.product_id WHERE `user_id`=$user_id;");
 
 
                 $row = mysqli_fetch_assoc($tb_pinfo);
                 $grand_total = 0;
+                $x=0;
 
                 while ($row) {
-                 
+                 $x++;
                 ?>
                   <tr>
                     <td><?= $row['product_id'] ?></td>
@@ -216,14 +216,14 @@ if ($user_id == 0) { ?>
                     </td>
                     <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
                     <td>
-                      <input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;">
+                      <input type="number" class="form-control itemQty" value="<?= $row['qty'] ?>" style="width:75px;" min="0">
                     </td>
-                    <td>&nbsp;&nbsp;<?= number_format($row['total_price'], 2)." /="; ?></td>
+                    <td>&nbsp;&nbsp;<span id=<?php echo 'qnt' . $row['product_id'] ?>><?php echo number_format($row['total_price'], 2)." /="; ?></span></td>
                     <td>
                       <a href="action.php?remove=<?= $row['product_id'] ?>" class="text-danger lead" onclick="return confirm('Are you sure want to remove this item?');"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
-                  <?php $grand_total +=$row['total_price']; ?>
+                 <?php $grand_total +=$row['total_price']; ?>
                 <?php
                   $row = mysqli_fetch_assoc($tb_pinfo);
                 } ?>
@@ -233,7 +233,7 @@ if ($user_id == 0) { ?>
                       Shopping</a>
                   </td>
                   <td colspan="2"><b>Grand Total</b></td>
-                  <td><b>&nbsp;&nbsp;<?= number_format($grand_total, 2)." /="; ?></b></td>
+                  <td><b>&nbsp;&nbsp;<span id='grandT'> <?= number_format($grand_total, 2)." /="; ?></span></b></td>
                   <td>
                     <a href="checkout.php" class="btn btn-info <?= ($grand_total > 1) ? '' : 'disabled'; ?>"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
                   </td>
@@ -253,23 +253,25 @@ if ($user_id == 0) { ?>
 
         // Change the item quantity
         $(".itemQty").on('change', function() {
+          event.preventDefault();
           var $el = $(this).closest('tr');
 
-          var pid = $el.find(".pid").val();
+          var pidn = $el.find(".pid").val();
           var pprice = $el.find(".pprice").val();
           var qty = $el.find(".itemQty").val();
-          location.reload(true);
+          // location.reload(true);
           $.ajax({
             url: 'action.php',
             method: 'post',
             cache: false,
             data: {
               qty: qty,
-              pid: pid,
+              pidn: pidn,
               pprice: pprice
             },
             success: function(response) {
-              console.log(response);
+              // console.log(response);
+              $("#qnt" + pidn).html(response);
             }
           });
         });

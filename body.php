@@ -244,17 +244,17 @@ if (isset($_SESSION['user_login'])) {
                 <div class="row">
 
                   <!-- <div class="d-flex justify-content-between pCardPrice"> -->
-                  <h4 class="col-sm-8"><?php echo $hw['product_price']; ?></h4>
-                  
+                  <h4 class="col-sm-8"><?php echo $hw['product_price']; ?><i class="currency-icon">৳</i></h4>
+
                 </div>
                 <?php
 
                 $pid = $hw['product_id'];
 
                 if ($user_id > 0) { ?>
-                <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                  <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
                     cart</button>
-                    <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
+                  <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
                   <!-- </div> -->
 
 
@@ -295,10 +295,10 @@ if (isset($_SESSION['user_login'])) {
               on products.product_id=dt.p_id
               ;");
 
-// $numRows = mysqli_num_rows($nw);
+      // $numRows = mysqli_num_rows($nw);
 
-// // Display the number of rows
-// echo "Number of rows fetched: " . $numRows;
+      // // Display the number of rows
+      // echo "Number of rows fetched: " . $numRows;
       $hww = mysqli_fetch_assoc($nw);
       while ($hww) { ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -321,17 +321,17 @@ if (isset($_SESSION['user_login'])) {
                 <div class="row">
 
                   <!-- <div class="d-flex justify-content-between pCardPrice"> -->
-                  <h4 class="col-sm-8"><?php echo $hww['product_price']; ?></h4>
-                  
+                  <h4 class="col-sm-8"><?php echo $hww['product_price']; ?><i class="currency-icon">৳</i></h4>
+
                 </div>
                 <?php
 
                 $pid = $hww['product_id'];
 
                 if ($user_id > 0) { ?>
-                <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                  <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
                     cart</button>
-                    <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
+                  <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
                   <!-- </div> -->
 
 
@@ -407,38 +407,38 @@ if (isset($_SESSION['user_login'])) {
                 </div>
                 <!-- <div class="card-footer p-1"> -->
                 <form action="" class="form-submit">
-                <input type="hidden" class="pqty" value="1">
-                <input type="hidden" class="pid" value="<?= $row['product_id'] ?>">
-                <input type="hidden" class="uid" value="<?= $user_id ?>">
-                <input type="hidden" class="pname" value="<?= $row['product_title'] ?>">
-                <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
-                <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>">
+                  <input type="hidden" class="pqty" value="1">
+                  <input type="hidden" class="pid" value="<?= $row['product_id'] ?>">
+                  <input type="hidden" class="uid" value="<?= $user_id ?>">
+                  <input type="hidden" class="pname" value="<?= $row['product_title'] ?>">
+                  <input type="hidden" class="pprice" value="<?= $row['product_price'] ?>">
+                  <input type="hidden" class="pimage" value="<?= $row['product_image'] ?>">
 
-                <div class="row">
+                  <div class="row">
 
-                  <!-- <div class="d-flex justify-content-between pCardPrice"> -->
-                  <h4 class="col-sm-8"><?php echo $row['product_price']; ?></h4>
-                  
-                </div>
-                <?php
+                    <!-- <div class="d-flex justify-content-between pCardPrice"> -->
+                    <h4 class="col-sm-8"><?php echo $row['product_price']; ?><i class="currency-icon">৳</i></h4>
 
-                $pid = $row['product_id'];
+                  </div>
+                  <?php
 
-                if ($user_id > 0) { ?>
-                <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
-                    cart</button>
-                <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
+                  $pid = $row['product_id'];
+
+                  if ($user_id > 0) { ?>
+                    <button class="btn btn-info addItemBtn" style="float: center;"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                      cart</button>
+                    <a href="review.php?id=<?php echo base64_encode($pid); ?>" class="btn btn-primary" style="float: right; width: 44%;"><i class="fas fa-comments"></i>Review</a> <br><br>
 
 
-                <?php
-                } else { ?>
-                  <button class="btn btn-info btn-block addItemBtn disabled"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
-                    cart</button>
-                <?php
-                }
-                ?>
+                  <?php
+                  } else { ?>
+                    <button class="btn btn-info btn-block addItemBtn disabled"><i class="fas fa-cart-plus"></i>&nbsp;&nbsp;Add to
+                      cart</button>
+                  <?php
+                  }
+                  ?>
 
-              </form>
+                </form>
                 <!-- </div> -->
               </div>
             </div>
